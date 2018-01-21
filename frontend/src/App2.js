@@ -8,16 +8,14 @@ import PostDetail from './components/PostDetail'
 import { fetchCategories } from '../src/actions'
 
 class App extends Component {
-  state = {}
-
   componentDidMount () {
-    const { getCategories } = this.props
-
-    getCategories()
+    const { fetchCategories } = this.props
+    fetchCategories()
   }
 
   render () {
-    console.log(this.props.categories)
+    const { categories } = this.props
+    console.log(categories)
 
     return (
       <div>
@@ -29,7 +27,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ categories }) => ({ categories })
-const mapDispatchToProps = dispatch => ({ getCategories: data => dispatch(fetchCategories()) })
+const mapStateToProps = state => ({
+  categories: state.categories
+})
+
+const mapDispatchToProps = {
+  fetchCategories
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
