@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
 
-import App from './App2'
-import reducer from './reducers'
+import App from './App'
+import configureStore from './store'
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+import 'semantic-ui-css/semantic.min.css'
+
+const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>

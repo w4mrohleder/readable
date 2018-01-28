@@ -1,19 +1,17 @@
 import { combineReducers } from 'redux'
 
-import { FETCH_CATEGORIES } from '../actions'
+import navigation from './navigation'
+import categories from './categories'
+import posts from './posts'
+import post from './post'
+import comments from './comments'
 
-const categories = (state = {}, { type, payload }) => {
-  switch (type) {
-    case FETCH_CATEGORIES:
-      console.log('type: FETCH_CATEGORIES')
-      return payload.categories
-
-    default:
-      console.log('type: DEFAULT')
-      return state
-  }
-}
-
-export default combineReducers({
-  categories
+const reducer = combineReducers({
+  navigation,
+  categories,
+  posts,
+  post,
+  comments
 })
+
+export default reducer
