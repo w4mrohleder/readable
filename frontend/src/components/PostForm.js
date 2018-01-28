@@ -25,7 +25,7 @@ class PostForm extends Component {
 
   render () {
     return (
-      <Form>
+      <Form style={{ marginBottom: 20 }}>
         <input style={{ margin: '30px 0 10px' }} placeholder='title' ref={input => (this.title = input)} />
         <input style={{ marginBottom: 10 }} placeholder='author' ref={input => (this.author = input)} />
         <textarea style={{ marginBottom: 10 }} placeholder='body' ref={input => (this.body = input)} />

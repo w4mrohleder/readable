@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
 import Navigation from './components/Navigation'
-import Main from './components/Main'
+// import Main from './components/Main'
 import CategoryList from './components/CategoryList'
 import PostDetail from './components/PostDetail'
 
@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <Container>
         <Navigation />
-        <Route exact path='/' component={Main} />
+        <Route exact path='/' component={CategoryList} />
         <Route exact path='/:category' component={CategoryList} key={Date.now()} />
         <Route exact path='/:category/:postId' component={PostDetail} />
       </Container>

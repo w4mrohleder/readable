@@ -6,7 +6,7 @@ import { fetchPost, editPost, deletePost, votePost, selectCategory, fetchComment
 import Comments from './Comments'
 import PostVote from './PostVote'
 
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Form } from 'semantic-ui-react'
 
 class PostDetail extends Component {
   state = { editing: false }
@@ -69,15 +69,11 @@ class PostDetail extends Component {
         </p>
 
         {editing &&
-          <div>
-            <div>
-              <input defaultValue={post.title} ref={input => (this.title = input)} />
-            </div>
-            <div>
-              <textarea defaultValue={post.body} ref={input => (this.body = input)} />
-            </div>
+          <Form>
+            <input style={{ marginBottom: 10 }} defaultValue={post.title} ref={input => (this.title = input)} />
+            <textarea style={{ marginBottom: 10 }} defaultValue={post.body} ref={input => (this.body = input)} />
             <Button primary size='mini' onClick={() => this.onSavePost(post.id)}>Save</Button>
-          </div>}
+          </Form>}
         {!editing && <div>{post.body}</div>}
 
         <div style={{ marginTop: 30 }}>

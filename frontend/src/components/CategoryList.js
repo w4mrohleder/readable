@@ -5,6 +5,7 @@ import _ from 'lodash'
 import { fetchPosts, selectCategory } from '../actions'
 import Post from './Post'
 import PostForm from './PostForm'
+import Sorter from './Sorter'
 
 import { Item, Message, Button } from 'semantic-ui-react'
 
@@ -31,8 +32,10 @@ class CategoryList extends Component {
   }
 
   render () {
-    const { posts, nav: { category } } = this.props
+    const { posts, nav: { category, sorting } } = this.props
     const { adding } = this.state
+
+    const postsSorted = _.orderBy(posts, sorting, 'asc')
 
     return (
       <div>
@@ -45,8 +48,10 @@ class CategoryList extends Component {
 
         {_.isEmpty(posts) && <Message info>There are currently no posts in this category</Message>}
 
+        {!_.isEmpty(posts) && <Sorter />}
+
         <Item.Group>
-          {_.map(posts, (post, index) => (
+          {_.map(postsSorted, (post, index) => (
             <Item key={index}>
               <Post post={post} />
             </Item>
