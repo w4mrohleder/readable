@@ -13,7 +13,12 @@ class PostForm extends Component {
       if (post) {
         editPost(this.body.value)
       } else {
-        addPost(category, this.title.value, this.body.value, this.author.value)
+        // if adding new post in 'Home', use category value from Select
+        if (this.category) {
+          addPost(this.category.value, this.title.value, this.body.value, this.author.value)
+        } else {
+          addPost(category, this.title.value, this.body.value, this.author.value)
+        }
       }
       this.title.value = ''
       this.author.value = ''
@@ -24,8 +29,14 @@ class PostForm extends Component {
   }
 
   render () {
+    const { nav, categories } = this.props
+
     return (
       <Form style={{ marginBottom: 20 }}>
+        {!nav.category &&
+          <select ref={input => (this.category = input)}>
+            {categories.map((category, index) => <option key={index} value={category.name}>{category.name}</option>)}
+          </select>}
         <input style={{ margin: '30px 0 10px' }} placeholder='title' ref={input => (this.title = input)} />
         <input style={{ marginBottom: 10 }} placeholder='author' ref={input => (this.author = input)} />
         <textarea style={{ marginBottom: 10 }} placeholder='body' ref={input => (this.body = input)} />
@@ -35,9 +46,14 @@ class PostForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  nav: state.navigation,
+  categories: state.categories
+})
+
 const mapDispatchToProps = {
   addPost,
   editPost
 }
 
-export default connect(null, mapDispatchToProps)(PostForm)
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm)
